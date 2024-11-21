@@ -20,8 +20,8 @@ RUN wget https://downloads.apache.org/tomcat/tomcat-11/v11.0.1/bin/apache-tomcat
     tar -xzf /tmp/tomcat.tar.gz --strip-components=1 -C $CATALINA_HOME && \
     rm -f /tmp/tomcat.tar.gz
 
-COPY *.war $CATALINA_HOME/webapps/ROOT/ROOT.war
+COPY *.war $CATALINA_HOME/webapps/ROOT.war
 
-EXPOSE 9090
+EXPOSE 8080
 
 CMD [ "catalina.sh", "run" ]

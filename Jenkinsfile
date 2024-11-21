@@ -1,33 +1,48 @@
-pipeline {
-    agent {
+pipeline{
+    agent{
         label "any"
     }
-    stages {
-        stage("Docker Build") {
-            steps {
-                sh "docker ps -a; docker rm -f n1; docker container run -d --name n1 -p 8081:80 nginx; docker ps -a"
+    stages{
+        stage("Git Checkout"){
+            steps{
+                echo "========executing Git Checkout========"
+                git branch: "main",
+                    credentialsId: "git-creds",
+                    url: "https://github.com/VibishnathanG/Jenkins-Workspace.git"
             }
-            post {
-                always {
-                    echo "========always========"
+            steps{
+                echo "Listing File from Checkout"
+                sh "ls -larnt"
+            }
+            post{
+                always{
+                    echo "========Git Checkout Block Completed========"
                 }
-                success {
-                    echo "========Docker Build executed successfully========"
+                success{
+                    echo "========Git Checkout executed successfully========"
                 }
-                failure {
-                    echo "========Docker Build execution failed========"
+                failure{
+                    echo "========Git Checkout execution failed========"
                 }
             }
         }
     }
-    post {
-        always {
+        stage("Maven Build"){
+            steps{
+                sh "mvn clean package"
+            }
+        }
+
+        
+
+    post{
+        always{
             echo "========always========"
         }
-        success {
+        success{
             echo "========pipeline executed successfully ========"
         }
-        failure {
+        failure{
             echo "========pipeline execution failed========"
         }
     }

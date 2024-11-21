@@ -5,7 +5,6 @@ pipeline{
     stages{
         stage("Docker Build"){
             steps{
-                echo "========executing Docker Build========"
                 sh "docker ps -a; docker rm -f $(docker ps -aq); docker container run -d --name n1 -p 8081:80 nginx; docker ps -a "
             }
             post{

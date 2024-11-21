@@ -1,33 +1,33 @@
-pipeline{
-    agent{
+pipeline {
+    agent {
         label "slave1"
     }
-    stages{
-        stage("Docker Build"){
-            steps{
-                sh "docker ps -a; docker rm -f $(docker ps -aq); docker container run -d --name n1 -p 8081:80 nginx; docker ps -a "
+    stages {
+        stage("Docker Build") {
+            steps {
+                sh "docker ps -a; docker rm -f \\$(docker ps -aq); docker container run -d --name n1 -p 8081:80 nginx; docker ps -a"
             }
-            post{
-                always{
+            post {
+                always {
                     echo "========always========"
                 }
-                success{
+                success {
                     echo "========Docker Build executed successfully========"
                 }
-                failure{
+                failure {
                     echo "========Docker Build execution failed========"
                 }
             }
         }
     }
-    post{
-        always{
+    post {
+        always {
             echo "========always========"
         }
-        success{
+        success {
             echo "========pipeline executed successfully ========"
         }
-        failure{
+        failure {
             echo "========pipeline execution failed========"
         }
     }

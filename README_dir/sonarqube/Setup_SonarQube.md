@@ -44,8 +44,47 @@ Source: https://docs.sonarqube.org/latest/requirements/requirements/
    ```
    1. Terminate EC2 instance incase if you setup only for this lab. 
 
-For adding Unit file to manage with systemd
-[root@ip-10-0-2-174 opt]# cat /etc/systemd/system/sonarqube.service
+# README: Creating a systemd Unit File for Linux Services
+
+## Purpose
+This document explains how to create and configure a systemd unit file to manage a custom service on a Linux system.
+
+## Steps to Create and Configure
+1. **Navigate to the Systemd Directory**:
+   Use the following command to navigate to the directory where systemd unit files are stored:
+   ```bash
+   sudo nano /etc/systemd/system/example.service
+
+# README: Example Systemd Unit File
+
+## Unit Section
+- `Description=Example Service`  
+  A brief description of the service.
+- `After=network.target`  
+  Specifies that this service should start after the network is available.
+
+## Service Section
+- `ExecStart=/usr/bin/example-command`  
+  The command that is executed to start the service.
+- `Restart=always`  
+  Configures the service to always restart if it stops.
+- `User=exampleuser`  
+  Runs the service as the specified user (`exampleuser`).
+- `WorkingDirectory=/path/to/working/directory`  
+  Sets the working directory for the service.
+
+## Install Section
+- `WantedBy=multi-user.target`  
+  Ensures the service is started in the multi-user runlevel.
+
+## Notes
+- Replace `example-command`, `exampleuser`, and `/path/to/working/directory` with your actual values.
+- Save this file as `/etc/systemd/system/example.service`.
+- Reload systemd after editing the file:
+  ```bash
+  sudo systemctl daemon-reload
+
+
 [Unit]
 Description=SonarQube service
 After=syslog.target network.target

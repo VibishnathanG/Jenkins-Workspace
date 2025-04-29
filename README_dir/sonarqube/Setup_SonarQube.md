@@ -44,21 +44,17 @@ Source: https://docs.sonarqube.org/latest/requirements/requirements/
    ```
    1. Terminate EC2 instance incase if you setup only for this lab. 
 
-## 📌 Who is using this   
-People who want to setup SonarQube and would like to integrate with Jenkins 
-
-
-
-## Additional Resources
-
- - [How to integrate SonarQube wih Jenkins](https://www.youtube.com/c/ValaxyTechnologies/videos)  
- 
-   
-## 🔗 My Profile
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://www.udemy.com/user/ar-shankar/)  
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ravdsun/)
-
-
-  ### 💡 Help/Suggestions or 🐛 Bugs
-
-Thank you for your interest in contributing to our project. Whether it is a bug report, new feature, correction, or additional documentation or solutions, we greatly value feedback and contributions from our community. [Start here](/issues)   
+For adding Unit file to manage with systemd
+[root@ip-10-0-2-174 opt]# cat /etc/systemd/system/sonarqube.service
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+[Service]
+Type=forking
+ExecStart=/opt/sonarqube-7.6/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube-7.6/bin/linux-x86-64/sonar.sh stop
+User=sonar
+Group=sonar
+Restart=always
+[Install]
+WantedBy=multi-user.target

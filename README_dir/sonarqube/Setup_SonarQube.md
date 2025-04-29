@@ -85,15 +85,15 @@ This document explains how to create and configure a systemd unit file to manage
   sudo systemctl daemon-reload
 
 
-[Unit]
-Description=SonarQube service
-After=syslog.target network.target
-[Service]
-Type=forking
-ExecStart=/opt/sonarqube-7.6/bin/linux-x86-64/sonar.sh start
-ExecStop=/opt/sonarqube-7.6/bin/linux-x86-64/sonar.sh stop
-User=sonar
-Group=sonar
-Restart=always
-[Install]
-WantedBy=multi-user.target
+- [Unit]
+- Description=SonarQube service
+- After=syslog.target network.target
+- [Service]
+- Type=forking
+- ExecStart=/opt/sonarqube-7.6/bin/linux-x86-64/sonar.sh start
+- ExecStop=/opt/sonarqube-7.6/bin/linux-x86-64/sonar.sh stop
+- User=sonar
+- Group=sonar
+- Restart=always
+- [Install]
+- WantedBy=multi-user.target
